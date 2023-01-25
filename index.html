@@ -12,24 +12,18 @@
 <body>
 
     <form action="#" id="form">
-        <label for="Date of birth">Firstname: </label>
+        <label for="firstname">Firstname: </label>
         <input type="text" name="firstname" id="firstname"><br>
-        <p class="errorF"></p>
-
-        <label for="lastname">Lastname: </label>
-        <input type="text" name="lastname" id="lastname"><br>
-        <p class="errorL"></p>
+        <p id="errorF"></p>
 
         <label for="email">Email: </label>
-        <input type="text" name="email" id="email"><br>
-        <p class="errorE"></p>
+        <input type="email" name="email" id="email"><br>
+        <p id="errorE"></p>
 
         <label>Sexe : </label>
-        <label for="sexe">Male </label>
-        <input type="radio" name="sexe" id="sexe" value="male">
-        <label for="sexe">Female </label>
-        <input type="radio" name="sexe" id="sexe" value="female"><br>
-        <p class="errorS"></p>
+        Male <input type="radio" name="sexe" id="male" value="male">
+        Female <input type="radio" name="sexe" id="female" value="female">
+        <p id="errorS"></p>
 
         <label for="date">Date of Birth</label>
         <input type="date" name="date" id="date"><br>
@@ -309,7 +303,9 @@
         </tr>
     </table>
 
-    <script src="/src/js/index.js"></script>
+
+
+    <script src="/src/js/index1.js"></script>
 </body>
 
 </html>
