@@ -1,97 +1,108 @@
-function getElementHtml() {
-    const form = document.querySelector("#form");
-    const firstName = document.querySelector("#firstname");
-    const lastName = document.querySelector("#lastname");
-    const email = document.querySelector("#email");
-    const sexe = document.querySelector("#sexe");
-    const date = document.querySelector("#date");
-    const country = document.querySelector("#country");
-    const telephone = document.querySelector("#telephone");
-    const button = document.querySelector("#button");
+// select element
+const form = document.querySelector("#form");
+const username = document.querySelector("#username");
+const email = document.querySelector("#email");
+const password = document.querySelector("#password");
+const password_confirm = document.querySelector("#password_confirm");
 
-    return {
-        form, firstName, lastName, email, sexe, date, country, telephone, button
-    };
-}
+// select all error
 
-getElementHtml().form.addEventListener("click", function (e) {
+const username_error = document.querySelector("#username_error");
+const email_error = document.querySelector("#email_error");
+const password_error = document.querySelector("#password_error");
+
+//form submit
+
+form.addEventListener('submit', function (e) {
     e.preventDefault();
     validation();
 })
 
+// event listener 
+
+username.addEventListener('blur', usernameVerification, true);
+email.addEventListener('blur', emailVerification, true);
+password.addEventListener('blur', passwordVerification, true);
+
+// validation function
 function validation() {
+    if (username.value.length === 0) {
 
-    const firstNameValue = getElementHtml().firstName.value.trim();
-    const lastNameValue = getElementHtml().lastName.value.trim();
-    const emailValue = getElementHtml().email.value.trim();
-    const at = emailValue.indexOf("@");
-    const dot = emailValue.lastIndexOf(".")
-    const sexeValue = getElementHtml().sexe.value;
-    const dateValue = getElementHtml().date.value;
-    const countryValue = getElementHtml().country.value;
-    const telephoneValue = getElementHtml().telephone.value.trim();
-    const errorF = document.querySelector(".errorF");
-    const errorL = document.querySelector(".errorL");
-    const errorE = document.querySelector(".errorE");
-    const errorS = document.querySelector(".errorS");
-    const errorD = document.querySelector(".errorD");
-    const errorC = document.querySelector(".errorC");
-    const errorT = document.querySelector(".errorT");
+        username.classList.add('error_border');
+        username_error.textContent = 'Username is required';
+        username_error.classList.add('errorDanger');
+        username.focus();
+        return false;
+    }
+    if (email.value.length === 0) {
 
-    if (firstNameValue.length === 0) {
-        errorF.textContent = "Firstname is required";
-        errorF.classList.add("error");
-        getElementHtml().firstName.classList.add("sourdine");
+        email.classList.add('error_border');
+        email_error.textContent = 'Email is required';
+        email_error.classList.add('errorDanger');
+        email.focus();
+        return false;
     }
-    else if (!isNaN(firstNameValue)) {
-        errorF.textContent = "Firstname should be a character";
-        errorF.classList.add("error");
-        getElementHtml().firstName.classList.add("sourdine");
+    if (password.value.length === 0) {
+        password.classList.add('error_border');
+        password_error.textContent = 'Password is required';
+        password_error.classList.add('errorDanger');
+        password.focus();
+        return false;
     }
-    else if (lastNameValue.length === 0) {
-        errorL.textContent = "Lastname is required";
-        errorL.classList.add("error");
-        getElementHtml().lastName.classList.add("sourdine");
+    if (password.value !== password_confirm.value) {
+        password.classList.add('error_border');
+        document.querySelector("#password_confirm_div").classList.add('errorDanger');
+        password_confirm.classList.add('error_border'); //
+        password_error.textContent = "Two passwords do not match";
+        return false;
     }
-    else if (!isNaN(lastNameValue)) {
-        errorL.textContent = "Lastname should be a character";
-        errorL.classList.add("error");
-        getElementHtml().lastName.classList.add("sourdine");
-    }
-    else if (at < 1 || dot < at + 2 || dot + 2 >= emailValue.length) {
-        errorE.textContent = "Not a valid email";
-        errorE.classList.add("error");
-    }
-    else if (sexeValue.length === 0) {
-        errorS.textContent = "Sexe is required";
-        errorS.classList.add("sourdine");
-    }
-    else if (dateValue.length === 0) {
-        errorD.textContent = "Date is required";
-        errorD.classList.add("error");
-    }
-    else if (countryValue.length === 0) {
-        errorC.textContent = "Country is required";
-        errorC.classList.add("error");
-    }
-    else if (telephoneValue.length === 0 || telephoneValue.length !== 10) {
-        errorT.textContent = "Telephone is required or incorrect number";
-        errorT.classList.add("error");
-    }
-    else if (isNaN(telephoneValue)) {
-        errorT.textContent = "Telephone number should be in digit";
-        errorT.classList.add("error");
+}
+// event handler functions
 
+function usernameVerification() {
+    if (username.value.length !== 0) {
+        username.classList.add('succes_border');
+        document.querySelector('#username_div').classList.add('succes');
+        username_error.textContent = "";
+        return true;
     }
-    else {
-        getElementHtml().firstName.classList.remove("sourdine");
-        getElementHtml().lastName.classList.remove("sourdine");
-        errorC.textContent = " ";
-        errorD.textContent = " ";
-        errorE.textContent = " ";
-        errorF.textContent = " ";
-        errorL.textContent = " ";
-        errorS.textContent = " ";
-        errorT.textContent = " ";
+}
+
+function emailVerification() {
+    if (email.value.length !== 0) {
+        email.classList.add('succes_border');
+        document.querySelector('#email_div').classList.add('succes');
+        email_error.textContent = "";
+        return true;
+    }
+}
+
+function passwordVerification() {
+    if (password.value.length !== 0) {
+        password.classList.add('succes_border');
+        document.querySelector('#password_div').classList.add('succes');
+        document.querySelector('#password_confirm_div').classList.add('succes');
+        password_error.textContent = "";
+        return true;
+    }
+    if (password.value === password_confirm.value) {
+        /**
+         * password.classList.add('error_border');
+    document.querySelector("#password_confirm_div").classList.add('errorDanger');
+    password_confirm.classList.add('error_border'); //
+    password_error.textContent = "Two passwords do not match";
+    return false;
+         */
+        /**
+         * password.style.border = "1px solid #5e6e66";
+        document.getElementById('pass_confirm_div').style.color = "#5e6e66";
+        password_error.innerHTML = "";
+        return true;
+         */
+        password.classList.add('succes_border');
+        document.querySelector("#password_confirm_div").classList.add('succes');
+        password_confirm.classList.remove('errorDanger');
+        password_error.textContent = "";
+        return true;
     }
 }
