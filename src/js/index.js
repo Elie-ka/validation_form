@@ -50,10 +50,15 @@ function validation() {
         return false;
     }
     if (password.value !== password_confirm.value) {
-        password.classList.add('error_border');
-        document.querySelector("#password_confirm_div").classList.add('errorDanger');
-        password_confirm.classList.add('error_border'); //
+        password.style.border = '1px solid red';
+        //password.classList.add('error_border');
+        //password_confirm.classList.add('error_border');
+        password_confirm.style.border = '1px solid red';
         password_error.textContent = "Two passwords do not match";
+        password_error.classList.add('errorDanger')
+        //password_error.classList.add('errorDanger');
+        //password_confirm.classList.add('error_border');
+
         return false;
     }
 }
@@ -85,24 +90,16 @@ function passwordVerification() {
         password_error.textContent = "";
         return true;
     }
+
+    /**
+     * password.style.border = '1px solid red';
+         password_confirm.style.border = '1px solid red';
+         password_error.textContent = "Two passwords do not match";
+     */
     if (password.value === password_confirm.value) {
-        /**
-         * password.classList.add('error_border');
-    document.querySelector("#password_confirm_div").classList.add('errorDanger');
-    password_confirm.classList.add('error_border'); //
-    password_error.textContent = "Two passwords do not match";
-    return false;
-         */
-        /**
-         * password.style.border = "1px solid #5e6e66";
-        document.getElementById('pass_confirm_div').style.color = "#5e6e66";
-        password_error.innerHTML = "";
-        return true;
-         */
-        password.classList.add('succes_border');
-        document.querySelector("#password_confirm_div").classList.add('succes');
-        password_confirm.classList.remove('errorDanger');
         password_error.textContent = "";
-        return true;
+        password.style.border = '1px solid black';
+        password_confirm.style.border = '1px solid black';
+
     }
 }
